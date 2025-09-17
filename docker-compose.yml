@@ -1,1 +1,9 @@
-
+version: "3.8"
+services:
+  floodmapper_api:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
