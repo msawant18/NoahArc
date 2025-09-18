@@ -1,9 +1,13 @@
-version: "3.8"
+version: "3.9"
 services:
-  floodmapper_api:
+  floodmapper:
     build: .
-    ports:
-      - "8080:8080"
     volumes:
       - ./data:/app/data
-      - ./outputs:/app/outputs
+      - ./configs:/app/configs
+    command: bash scripts/train_model.sh
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
