@@ -1,1 +1,16 @@
+data_config: "configs/data_config.yaml"
+model_config: "configs/model_config.yaml"
 
+preprocessing:
+  speckle_filter: "lee"
+  normalization: "zscore"
+  augmentation:
+    flips: true
+    rotations: true
+
+evaluation:
+  metrics: ["iou", "f1", "precision", "recall", "brier", "ece"]
+
+calibration:
+  method: "temperature"
+  threshold: 0.45
