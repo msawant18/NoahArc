@@ -1,1 +1,12 @@
-
+torch
+torchvision
+pytorch-lightning
+rasterio
+shapely
+pyproj
+numpy
+pandas
+scikit-learn
+matplotlib
+fastapi
+uvicorn
