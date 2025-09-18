@@ -5,7 +5,6 @@ __pycache__/
 *.pyd
 *.so
 *.egg-info/
-.venv/
 
 # Data
 data/*
@@ -15,5 +14,12 @@ data/*
 
 # Logs
 *.log
+*.ckpt
+
+# Notebooks
+.ipynb_checkpoints/
 
 # Env
+.env
+.venv
+*.swp
