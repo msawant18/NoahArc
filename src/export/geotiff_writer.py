@@ -5,26 +5,46 @@ import numpy as np
 from pathlib import Path
 try:
     import rasterio
-    from rasterio.transform import from_origin
+    from rasterio.shutil import copy as rio_copy
     HAS_RIO = True
 except Exception:
     HAS_RIO = False
 
-def save_mask_geotiff(mask, out_path, transform=(0,1,0,0), crs="EPSG:4326"):
+def save_mask_geotiff(mask: np.ndarray, out_path: str, reference_raster: str = None, dtype="uint8", compress="deflate"):
     """
-    mask: 2D numpy array (0/1) or float prob
-    transform: (left, xres, 0, top) rough; for synthetic runs it's placeholder
+    Save a mask/proba array as GeoTIFF; if reference_raster provided, copy its CRS & transform.
     """
     outp = Path(out_path)
     outp.parent.mkdir(parents=True, exist_ok=True)
-    if HAS_RIO:
-        h,w = mask.shape
-        # simple placeholder transform (left, xres, 0, top, 0, -yres)
-        left, xres, _, top = transform
-        tf = from_origin(left, top, xres, xres)
-        dtype = "float32" if mask.dtype.kind == "f" else "uint8"
-        with rasterio.open(str(outp), 'w', driver='GTiff', height=h, width=w, count=1, dtype=dtype, crs=crs, transform=tf) as dst:
-            dst.write(mask.astype(dtype), 1)
-    else:
-        # fallback: save as numpy
+    if not HAS_RIO:
+        # fallback
         np.save(str(outp.with_suffix(".npy")), mask)
+        return
+
+    if reference_raster:
+        with rasterio.open(reference_raster) as ref:
+            profile = ref.profile.copy()
+            profile.update({
+                "height": mask.shape[0],
+                "width": mask.shape[1],
+                "count": 1,
+                "dtype": dtype,
+                "compress": compress
+            })
+            with rasterio.open(str(outp), "w", **profile) as dst:
+                dst.write(mask.astype(dtype), 1)
+    else:
+        # no reference – create a simple profile with WGS84 (WARNING: user should supply reference)
+        h,w = mask.shape
+        profile = {
+            "driver":"GTiff",
+            "height": h,
+            "width": w,
+            "count": 1,
+            "dtype": dtype,
+            "crs": "EPSG:4326",
+            "transform": rasterio.transform.from_origin(0,0,1,1),
+            "compress": compress
+        }
+        with rasterio.open(str(outp), "w", **profile) as dst:
+            dst.write(mask.astype(dtype), 1)
