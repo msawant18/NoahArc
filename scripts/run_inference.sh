@@ -1,2 +1,3 @@
 #!/bin/bash
-python -m src.models.infer outputs/model.pth data/raw data/outputs
+python -m src.models.infer --ckpt artifacts/checkpoints/best.pt --in_dir data/processed --out_dir data/outputs --threshold 0.5
+
