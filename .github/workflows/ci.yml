@@ -26,6 +26,12 @@ jobs:
       - name: Run tests
         run: |
           pytest -q --maxfail=1
+      - name: Install extra deps for integration
+        run: |
+          pip install requests
+      - name: Run integration tests
+        run: |
+          pytest -q tests/test_integration_sentinel.py::test_sentinel_patch_inference
 
   docker-build:
     runs-on: ubuntu-latest
