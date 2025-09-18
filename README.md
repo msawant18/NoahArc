@@ -16,9 +16,23 @@ Ideal for climate monitoring, disaster response, and research.
 
 ---
 
+### Clone the repo
 
+```bash
+git clone https://github.com/msawant18/NoahArc.git
+cd NoahArc
 
+Contributing
 
+Fork the repo
+
+Create a branch: git checkout -b feature/my-feature
+
+Commit your changes: git commit -m "Add feature"
+
+Push: git push origin feature/my-feature
+
+Open a Pull Request
 
 
 
