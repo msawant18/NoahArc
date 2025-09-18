@@ -1,5 +1,28 @@
 # NoahArc
-This is a production-ready deep learning pipeline for flood detection from Sentinel-1 SAR imagery. It performs binary semantic segmentation (flooded vs. non-flooded land), outputs explainable masks with calibrated confidence, and generates georeferenced layers for emergency response and climate risk analytics. 
+This is a production-ready deep learning pipeline for flood detection from Sentinel-1 SAR imagery. 
+
+---
+
+## Overview
+
+NoahArc performs:
+
+- **Binary flood mapping** on 512×512 Sentinel-1 SAR tiles  
+- **Explainable AI outputs**: calibrated confidence maps  
+- **Georeferenced mask export** compatible with GIS tools  
+- Fully **containerized** for reproducible deployment  
+
+Ideal for climate monitoring, disaster response, and research.
+
+---
+
+
+
+
+
+
+
+It performs binary semantic segmentation (flooded vs. non-flooded land), outputs explainable masks with calibrated confidence, and generates georeferenced layers for emergency response and climate risk analytics. 
 NoahArc/
 ├── README.md                # Project overview (2-page compressed)
 ├── LICENSE                  # Apache 2.0 (or your choice)
