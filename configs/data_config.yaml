@@ -1,1 +1,7 @@
-
+tile_size: 512
+overlap: 64
+polarization: "VV"
+normalize: "zscore"
+data_path: "data/raw"
+processed_path: "data/processed"
+output_path: "data/outputs"
