@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "noaharc"
+version = "0.1.0"
+description = "NoahArc — flood segmentation pipeline for Sentinel-1 SAR tiles"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [{name = "Mrunal Sawant", email = "msawant1896@gmail.com"}]
