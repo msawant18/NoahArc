@@ -19,4 +19,8 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
       - name: Run tests
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/src
+          pytest -q --maxfail=1
+      - name: Run tests
         run: pytest -v --maxfail=1 --disable-warnings
