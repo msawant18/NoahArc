@@ -1,1 +1,2 @@
-# NoahArc package
+"""NoahArc package init."""
+__version__ = "0.1.0"
